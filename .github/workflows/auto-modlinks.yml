@@ -48,7 +48,7 @@ jobs:
           git checkout -b $BRANCH_NAME
 
           # Update the script files to the latest version.
-          echo "$now" > ModLinks.xml
+          echo "SYSTUM" > ModLinks.xml
 
           # Commit the changes and push the feature branch to origin
           git add .

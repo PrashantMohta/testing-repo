@@ -21,10 +21,10 @@ jobs:
 
       - name: Send pull-request
         run: |
-          PROJECT_NAME = "${{vars.PROJECT_NAME}}"
-          USER_NAME = "${{vars.USER_NAME }}"
-          USER_EMAIL = "${{vars.USER_EMAIL }}"
-          ACCESS_TOKEN = "${{ secrets.ACCESS_TOKEN }}"
+          PROJECT_NAME="${{vars.PROJECT_NAME}}"
+          USER_NAME="${{vars.USER_NAME }}"
+          USER_EMAIL="${{vars.USER_EMAIL }}"
+          ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}"
           LATEST_TAG=$(git describe --tags --always --abbrev=0)
           REPOSITORY="PrashantMohta/modlinks"
           FOLDER="bin/$REPOSITORY"

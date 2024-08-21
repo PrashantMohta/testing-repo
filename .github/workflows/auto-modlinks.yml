@@ -3,7 +3,7 @@ on:
     tags:
     - '*'
 
-name: on-commit-to-main
+name: on-new-release-raise-modlinks-mr
 
 jobs:
   send-pull-requests:
@@ -25,14 +25,13 @@ jobs:
           
           CURR_REPO_NAME="${{github.repository}}"
           ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}"
-
           PROJECT_NAME="${{vars.PROJECT_NAME}}"
           USER_NAME="${{vars.USER_NAME }}"
           USER_EMAIL="${{vars.USER_EMAIL }}"
           ASSET_NAME="${{vars.ASSET_NAME}}"
-          
+          REPOSITORY="$USER_NAME/modlinks"
+
           LATEST_TAG=$(git describe --tags --always --abbrev=0)
-          REPOSITORY="PrashantMohta/modlinks"
           FOLDER="bin/$REPOSITORY"
           BRANCH_NAME="update-$CURR_REPO_NAME-to-$LATEST_TAG"
           DOWNLOAD_LINK="https://github.com/$CURR_REPO_NAME/releases/download/$LATEST_TAG/$ASSET_NAME"

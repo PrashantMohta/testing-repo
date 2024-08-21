@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip' # caching pip dependencies
-        - run: |
+        run: |
           
           CURR_REPO_NAME="${{github.repository}}"
           ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}"

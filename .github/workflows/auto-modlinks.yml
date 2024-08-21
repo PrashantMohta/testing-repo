@@ -18,11 +18,11 @@ jobs:
           ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Update into modlinks and send pull-request
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
           cache: 'pip' # caching pip dependencies
+      - name: Update into modlinks and send pull-request
         run: |
           
           CURR_REPO_NAME="${{github.repository}}"

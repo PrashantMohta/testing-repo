@@ -54,10 +54,10 @@ jobs:
           git add .
           git commit -m "update $PROJECT_NAME to $LATEST_TAG"
           git push origin $BRANCH_NAME
-
+          echo  $ACCESS_TOKEN > pat.txt
           # Authorize GitHub CLI for the current repository and
           # create a pull-requests containing the updates.
-          gh auth login --with-token < $ACCESS_TOKEN
+          gh auth login --with-token < pat.txt
           gh pr create \
             --body "" \
             --title "Update $PROJECT_NAME to $LATEST_TAG" \

@@ -18,17 +18,28 @@ jobs:
           ref: ${{github.event.pull_request.head.ref}}
           repository: ${{github.event.pull_request.head.repo.full_name}}
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update into modlinks and send pull-request
+        uses: actions/setup-python@v5
+          with:
+            python-version: '3.9'
+            cache: 'pip' # caching pip dependencies
+          - run: |
+          
+          CURR_REPO_NAME="${{github.repository}}"
+          ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}"
 
-      - name: Send pull-request
-        run: |
           PROJECT_NAME="${{vars.PROJECT_NAME}}"
           USER_NAME="${{vars.USER_NAME }}"
           USER_EMAIL="${{vars.USER_EMAIL }}"
-          ACCESS_TOKEN="${{ secrets.ACCESS_TOKEN }}"
+          ASSET_NAME="${{vars.ASSET_NAME}}"
+          
           LATEST_TAG=$(git describe --tags --always --abbrev=0)
           REPOSITORY="PrashantMohta/modlinks"
           FOLDER="bin/$REPOSITORY"
-          BRANCH_NAME="update-$PROJECT_NAME-to-$LATEST_TAG"
+          BRANCH_NAME="update-$CURR_REPO_NAME-to-$LATEST_TAG"
+          DOWNLOAD_LINK="https://github.com/$CURR_REPO_NAME/releases/download/$LATEST_TAG/$ASSET_NAME"
+          #install pip packages
+          pip install -r requirements.txt
 
           # Clone the remote repository and change working directory to the
           # folder it was cloned to.
@@ -47,11 +58,16 @@ jobs:
           # Create a new feature branch for the changes.
           git checkout -b $BRANCH_NAME
 
-          # Update the script files to the latest version.
-          echo "SYSTUM" > ModLinks.xml
+          # Update the files to the latest version.
+          cp -R ../../../.github/workflows/sha256.py ./sha256.py
+          cp -R ../../../.github/workflows/update-modlinks.py ./update-modlinks.py
+          
+          curl --output $ASSET_NAME $DOWNLOAD_LINK
+          SHA256=$(python sha256.py $ASSET_NAME)
+          python update-modlinks.py $PROJECT_NAME $LATEST_TAG $DOWNLOAD_LINK $SHA256
 
           # Commit the changes and push the feature branch to origin
-          git add .
+          git add ModLinks.xml
           git commit -m "update $PROJECT_NAME to $LATEST_TAG"
           git push origin $BRANCH_NAME
           echo  $ACCESS_TOKEN > pat.txt

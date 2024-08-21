@@ -65,7 +65,7 @@ jobs:
           #pip install -r requirements.txt
           curl --output $ASSET_NAME $DOWNLOAD_LINK
           SHA256=$(python sha256.py $ASSET_NAME)
-          python update-modlinks.py $PROJECT_NAME $LATEST_TAG $DOWNLOAD_LINK $SHA256
+          python update-modlinks.py "$PROJECT_NAME" "$LATEST_TAG" "$DOWNLOAD_LINK" "$SHA256"
 
           # Commit the changes and push the feature branch to origin
           git add ModLinks.xml

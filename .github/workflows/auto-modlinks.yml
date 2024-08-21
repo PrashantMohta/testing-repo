@@ -70,7 +70,7 @@ jobs:
           # Commit the changes and push the feature branch to origin
           git add ModLinks.xml
           git commit -m "update $PROJECT_NAME to $LATEST_TAG"
-          git push origin $BRANCH_NAME
+          git push origin $BRANCH_NAME --force
           echo  $ACCESS_TOKEN > pat.txt
           # Authorize GitHub CLI for the current repository and
           # create a pull-requests containing the updates.

@@ -57,7 +57,7 @@ jobs:
 
           # Authorize GitHub CLI for the current repository and
           # create a pull-requests containing the updates.
-          gh auth login --with-token < ACCESS_TOKEN
+          gh auth login --with-token < $ACCESS_TOKEN
           gh pr create \
             --body "" \
             --title "Update $PROJECT_NAME to $LATEST_TAG" \

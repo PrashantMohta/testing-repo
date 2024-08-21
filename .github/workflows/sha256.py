@@ -14,7 +14,7 @@ else:
 
 BUF_SIZE = 65536 
 md5 = hashlib.md5()
-sha1 = hashlib.sha1()
+sha256 = hashlib.sha256()
 
 with open(name, 'rb') as f:
     while True:
@@ -22,6 +22,6 @@ with open(name, 'rb') as f:
         if not data:
             break
         md5.update(data)
-        sha1.update(data)
+        sha256.update(data)
 
-print("{0}".format(sha1.hexdigest()))
+print("{0}".format(sha256.hexdigest()))

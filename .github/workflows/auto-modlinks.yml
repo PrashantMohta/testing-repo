@@ -1,7 +1,11 @@
 on:
   push:
+    branches:
+    - main
+    tags-ignore:
+      - "**"
     tags:
-    - '*'
+      - '*'
 
 name: on-new-release-raise-modlinks-mr
 

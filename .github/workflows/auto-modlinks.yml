@@ -19,7 +19,7 @@ jobs:
           repository: ${{github.event.pull_request.head.repo.full_name}}
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Update into modlinks and send pull-request
-        uses: PrashantMohta/update-modlinks@e6a2e4fb8238d3507ff31d30d7707726b26cd2ee
+        uses: PrashantMohta/update-modlinks@8930fd0428851cc5536946d742232090f087b8af
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
           project-name: ${{vars.PROJECT_NAME}}
